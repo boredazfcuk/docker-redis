@@ -1,0 +1,6 @@
+20200209
+
+ - Change: Now using ENTRYPOINT launch method instead of command
+ - Change: Now using exec to launch Redis so it inherits PID of parent
+ - Change: Removed excess comments from launch script
+ - Change: Now using same logging format as Redis
