@@ -1,10 +1,9 @@
 #!/bin/ash
-exit 0
-exit_code=0
-exit_code="$(wget --quiet --tries=1 --spider --no-check-certificate "https://${HOSTNAME}:5050/couchpotato/index.html" | echo ${?})"
-if [ "${exit_code}" != 0 ]; then
-   echo "WebUI not responding: Error ${exit_code}"
+
+if [ "$(nc -z "$(hostname -i)" 6379; echo "${?}")" -ne 0 ]; then
+   echo "Redis server not responding on port 6379"
    exit 1
 fi
-echo "WebUI Available"
+
+echo "Redis server responding on port 6379"
 exit 0
