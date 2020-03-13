@@ -5,6 +5,7 @@ Initialise(){
    lan_ip="$(hostname -i)"
    echo -e "\n"
    echo "$$:E $(date '+%d %b %Y %H:%M:%S.%3N') # ***** Configuring Redis container launch environment *****"
+   echo "$$:E $(date '+%d %b %Y %H:%M:%S.%3N') # $(cat /etc/*-release | grep "PRETTY_NAME" | sed 's/PRETTY_NAME=//g' | sed 's/"//g')"
    echo "$$:E $(date '+%d %b %Y %H:%M:%S.%3N') # Listening IP Address: ${lan_ip}"
 }
 
