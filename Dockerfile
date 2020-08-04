@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:3.12
 MAINTAINER boredazfcuk
 ARG app_dependencies="coreutils tzdata redis"
 ARG data_dir="/var/lib/redis/"
