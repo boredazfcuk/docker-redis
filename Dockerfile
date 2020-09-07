@@ -3,7 +3,7 @@ MAINTAINER boredazfcuk
 ARG app_dependencies="coreutils tzdata redis"
 ARG data_dir="/var/lib/redis/"
 
-RUN echo "$(date '+%d/%m/%Y - %H:%M:%S') | ***** BUILD STARTED *****" && \
+RUN echo "$(date '+%d/%m/%Y - %H:%M:%S') | ***** BUILD STARTED FOR REDIS *****" && \
 echo "$(date '+%d/%m/%Y - %H:%M:%S') | Install application dependencies" && \
    apk add --no-cache --no-progress ${app_dependencies}
 
