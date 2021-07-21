@@ -7,6 +7,13 @@ Initialise(){
    echo "$$:E $(date '+%d %b %Y %H:%M:%S.%3N') # ***** Configuring Redis container launch environment *****"
    echo "$$:E $(date '+%d %b %Y %H:%M:%S.%3N') # $(cat /etc/*-release | grep "PRETTY_NAME" | sed 's/PRETTY_NAME=//g' | sed 's/"//g')"
    echo "$$:E $(date '+%d %b %Y %H:%M:%S.%3N') # Listening IP Address: ${lan_ip}"
+   if [ "${REDIS_HOST_PASSWORD}" ]; then
+      echo "$$:E $(date '+%d %b %Y %H:%M:%S.%3N') # Redis password: ${REDIS_HOST_PASSWORD}"
+   else
+      echo "$$:E $(date '+%d %b %Y %H:%M:%S.%3N') # Error - Please configure Redis password. Container will restart in 5 minutes"
+      sleep 300
+      exit 1
+   fi
 }
 
 Configure(){
@@ -26,7 +33,7 @@ LaunchRedis(){
    echo "$$:E $(date '+%d %b %Y %H:%M:%S.%3N') # ***** Configuration of Redis container launch environment complete *****"
    if [ -z "${1}" ]; then
       echo "$$:E $(date '+%d %b %Y %H:%M:%S.%3N') # Start Redis"
-      exec redis-server /etc/redis.conf
+      exec redis-server /etc/redis.conf --requirepass "${REDIS_HOST_PASSWORD}" 
    else
       exec "$@"
    fi
